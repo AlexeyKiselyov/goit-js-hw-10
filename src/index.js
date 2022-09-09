@@ -12,6 +12,8 @@ const refInput = document.querySelector('#search-box');
 
 refInput.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
 
+Notiflix.Notify.info('Please enter a name of country.');
+
 function onInputSearch(e) {
   let name = '';
   name = e.target.value.trim();
