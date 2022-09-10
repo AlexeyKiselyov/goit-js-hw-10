@@ -17,29 +17,30 @@ Notiflix.Notify.info('Please enter a name of country.');
 function onInputSearch(e) {
   let name = '';
   name = e.target.value.trim();
-  if (name === '') {
+  if (!name) {
     infoReset();
     return Notiflix.Notify.info('Please enter a name of country.');
   }
-  fetchCountries(name).then(resp => {
-    if (resp === undefined) {
-      return;
-    }
-    if (resp.length > 10) {
-      Notiflix.Notify.info(
-        'Too many matches found. Please enter a more specific name.'
-      );
-      infoReset();
-    }
-    if (resp.length <= 10 && resp.length > 2) {
-      refCountryList.innerHTML = countriesListMarkup(resp);
-      refCountryInfo.innerHTML = '';
-    }
-    if (resp.length === 1) {
-      refCountryInfo.innerHTML = countriesInfoMarkup(resp);
-      refCountryList.innerHTML = '';
-    }
-  });
+  fetchCountries(name)
+    .then(resp => {
+      if (resp.length > 10) {
+        Notiflix.Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
+        infoReset();
+      }
+      if (resp.length <= 10 && resp.length > 2) {
+        refCountryList.innerHTML = countriesListMarkup(resp);
+        refCountryInfo.innerHTML = '';
+      }
+      if (resp.length === 1) {
+        refCountryInfo.innerHTML = countriesInfoMarkup(resp);
+        refCountryList.innerHTML = '';
+      }
+    })
+    .catch(err => {
+      Notiflix.Notify.failure('Oops, there is no country with that name');
+    });
 }
 
 function infoReset() {
