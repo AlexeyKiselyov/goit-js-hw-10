@@ -27,7 +27,7 @@ export function countriesInfoMarkup(arr) {
       <p class="coutry-info__item"><span class="country-info__focus">Population: </span>${population}</p>
       <p class="coutry-info__item"><span class="country-info__focus">Languages: </span>${Object.values(
         languages
-      )}</p>
+      ).join(', ')}</p>
     </div>`
       );
     },
